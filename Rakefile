@@ -16,7 +16,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
+RuboCop::RakeTask.new(:rubocop)
 
-task default: :spec
+task default: %i[spec rubocop]
+
+task :clean do
+  FileUtils.rm_rf(Dir['tmp/*'], verbose: true)
+end

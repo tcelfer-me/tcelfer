@@ -14,8 +14,25 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'tcelfer/version'
+require 'json'
 
 module Tcelfer
-  class Error < StandardError; end
+  # Store the data for tcelfer
+  class Storage
+    attr_reader :data
+
+    DEFAULT_STORE_PATH = File.join(File.expand_path('../../', __dir__), 'tmp', 'dev_store.json')
+
+    def initialize
+      load!
+    end
+
+    def load!
+      @data = File.exist?(DEFAULT_STORE_PATH) ? JSON.parse(File.read(DEFAULT_STORE_PATH)) : {}
+    end
+
+    def save!
+      File.write(DEFAULT_STORE_PATH, @data.to_json)
+    end
+  end
 end
