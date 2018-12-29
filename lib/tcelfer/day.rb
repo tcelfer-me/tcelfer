@@ -14,33 +14,25 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'thor'
-require 'tty-prompt'
-
 require 'tcelfer'
-require 'tcelfer/day'
-require 'tcelfer/storage'
 
 module Tcelfer
-  # Thor CLI for Tcelfer
-  class CLI < Thor
-    def initialize(*_args)
-      @prompt = TTY::Prompt.new(interrupt: :exit)
+  # Handle "business" logic with days
+  class Day
+    attr_reader :rating, :notes
 
-      super
+    def initialize(rating, notes)
+      @rating = rating
+      @notes = notes
     end
 
-    desc 'day', 'record info for a day'
-    def day
-      rating = @prompt.select(
-        'How was your day?',
-        Tcelfer::DAY_RATINGS, required: true, filter: true
-      )
-      notes = @prompt.ask('Any additional notes?')
-      day = Tcelfer::Day.new(rating, notes)
-      day.save!
-    rescue Tcelfer::Error => err
-      @prompt.error(err)
+    def save!
+      @store = Tcelfer::Storage.new
+      today = Date.today.to_s
+      raise(Tcelfer::Error, "You already created an entry for #{today}") if @store.data.include?(today)
+
+      @store.data[Date.today.to_s] = { rating: @rating, notes: @notes }
+      @store.save!
     end
   end
 end

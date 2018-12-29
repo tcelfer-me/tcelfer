@@ -18,4 +18,14 @@ require 'tcelfer/version'
 
 module Tcelfer
   class Error < StandardError; end
+
+  DAY_RATINGS = [
+    'Amazing, Fantastic Day',
+    'Really Good, Happy Day',
+    'Normal, Average Day',
+    'Exhausted, Tired Day',
+    'Stressed-Out, Frantic Day',
+    'Frustrated, Angry Day',
+    'Depressed, Sad Day'
+  ].freeze
 end
