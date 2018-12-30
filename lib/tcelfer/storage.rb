@@ -23,21 +23,18 @@ module Tcelfer
   class Storage
     attr_reader :data
 
-    DEFAULT_STORE_PATH = File.join(
-      File.expand_path('../../', __dir__),
-      'tmp', 'dev_store.json'
-    )
-
     def initialize
       load!
     end
 
     def load!
-      @data = File.exist?(DEFAULT_STORE_PATH) ? JSON.parse(File.read(DEFAULT_STORE_PATH)) : {}
+      @data = File.exist?(Tcelfer.config.db_path) ? JSON.parse(File.read(Tcelfer.config.db_path)) : {}
     end
 
     def save!
-      File.write(DEFAULT_STORE_PATH, JSON.pretty_generate(@data))
+      cache_dir = File.dirname(Tcelfer.config.db_path)
+      FileUtils.mkdir_p(cache_dir) unless Dir.exist? cache_dir
+      File.write(Tcelfer.config.db_path, JSON.pretty_generate(@data))
     end
 
     def by_month(mon)

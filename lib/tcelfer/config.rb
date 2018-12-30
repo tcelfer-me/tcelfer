@@ -14,18 +14,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-RSpec.describe Tcelfer do
-  context 'base info' do
-    it 'has a version number' do
-      expect(Tcelfer::VERSION).not_to be nil
-    end
+require 'anyway'
 
-    it 'defines more than one daily rating' do
-      expect(Tcelfer::DAY_RATINGS.length).to be > 1
-    end
-
-    it 'is configurable with any_config' do
-      expect(described_class.config).to be_a Anyway::Config
-    end
+module Tcelfer
+  # Configuration for tcelfer, thanks to anyway_config
+  class Config < Anyway::Config
+    config_name :tcelfer
+    attr_config(
+      db_path: File.join(File.expand_path('../../', __dir__), 'tmp', 'dev_store.json')
+    )
   end
 end

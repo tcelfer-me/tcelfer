@@ -14,10 +14,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+require 'tcelfer/config'
 require 'tcelfer/errors'
 require 'tcelfer/storage'
 require 'tcelfer/version'
 
+# Main man Tcelfer himself
 module Tcelfer
   DAY_RATINGS = [
     'Amazing, Fantastic Day',
@@ -28,4 +30,8 @@ module Tcelfer
     'Frustrated, Angry Day',
     'Depressed, Sad Day'
   ].freeze
+
+  def self.config
+    @config ||= Config.new
+  end
 end
