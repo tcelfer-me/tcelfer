@@ -30,6 +30,10 @@ module Tcelfer
       super
     end
 
+    def self.exit_on_failure?
+      true
+    end
+
     desc 'day', 'record info for a day'
     def day
       rating = @prompt.select(
@@ -40,7 +44,7 @@ module Tcelfer
       day = Tcelfer::Day.new(rating, notes)
       day.save!
     rescue Tcelfer::Error => err
-      @prompt.error(err)
+      @prompt.error("[#{err.class}] #{err}")
     end
   end
 end

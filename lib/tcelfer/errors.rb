@@ -14,27 +14,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'tcelfer'
 
 module Tcelfer
-  # Handle "business" logic with days
-  class Day
-    attr_reader :rating, :notes
+  # Base error class, extend this one please
+  class Error < StandardError; end
 
-    def initialize(rating, notes)
-      raise(Tcelfer::DayError, "Rating, '#{rating}` not valid") unless Tcelfer::DAY_RATINGS.include? rating
+  # Issues with Tcelfer::Day
+  class DayError < Error; end
 
-      @rating = rating
-      @notes = notes
-    end
-
-    def save!
-      @store = Tcelfer::Storage.new
-      today = Date.today.to_s
-      raise(Tcelfer::DayError, "You already created an entry for #{today}") if @store.data.include?(today)
-
-      @store.data[Date.today.to_s] = { rating: @rating, notes: @notes }
-      @store.save!
-    end
-  end
+  # Issues with reports
+  class ReportError < Error; end
 end

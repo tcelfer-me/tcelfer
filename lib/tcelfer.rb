@@ -15,10 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'tcelfer/version'
+require 'tcelfer/errors'
 
 module Tcelfer
-  class Error < StandardError; end
-
   DAY_RATINGS = [
     'Amazing, Fantastic Day',
     'Really Good, Happy Day',
