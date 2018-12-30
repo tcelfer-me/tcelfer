@@ -14,7 +14,7 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-source 'https://rubygems.org'
+source(ENV['GEM_URL'] || 'https://rubygems.org')
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
