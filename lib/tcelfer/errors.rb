@@ -22,6 +22,9 @@ module Tcelfer
   # Issues with Tcelfer::Day
   class DayError < Error; end
 
+  # Issues with Storage
+  class StorageError < Error; end
+
   # Issues with reports
   class ReportError < Error; end
 end

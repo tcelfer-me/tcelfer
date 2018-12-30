@@ -14,12 +14,11 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+require 'paint'
 require 'thor'
 require 'tty-prompt'
 
 require 'tcelfer'
-require 'tcelfer/day'
-require 'tcelfer/storage'
 
 module Tcelfer
   # Thor CLI for Tcelfer
@@ -34,15 +33,35 @@ module Tcelfer
       true
     end
 
+    desc 'version', 'Prints the current version'
+    def version
+      puts Tcelfer::VERSION
+    end
+
     desc 'day', 'record info for a day'
     def day
+      require 'tcelfer/day'
       rating = @prompt.select(
         'How was your day?',
         Tcelfer::DAY_RATINGS, required: true, filter: true
       )
       notes = @prompt.ask('Any additional notes?')
-      day = Tcelfer::Day.new(rating, notes)
-      day.save!
+      day = Tcelfer::Day.new(rating, notes).save!
+      @prompt.say("Recorded [#{day.date}]: #{Paint[rating, :bold]}")
+    rescue Tcelfer::Error => err
+      @prompt.error("[#{err.class}] #{err}")
+    end
+
+    method_option(:month, aliases: ['-m'], type: :numeric)
+    desc 'report', 'generate a report'
+    def report
+      require 'tcelfer/report'
+      rep = Tcelfer::Report.new
+      if options['month']
+        @prompt.say(rep.generate_month_report(options['month']))
+      else
+        @prompt.say('This path is not yet supported')
+      end
     rescue Tcelfer::Error => err
       @prompt.error("[#{err.class}] #{err}")
     end

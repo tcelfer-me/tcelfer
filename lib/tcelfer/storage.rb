@@ -16,12 +16,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'json'
 
+require 'tcelfer/day'
+
 module Tcelfer
   # Store the data for tcelfer
   class Storage
     attr_reader :data
 
-    DEFAULT_STORE_PATH = File.join(File.expand_path('../../', __dir__), 'tmp', 'dev_store.json')
+    DEFAULT_STORE_PATH = File.join(
+      File.expand_path('../../', __dir__),
+      'tmp', 'dev_store.json'
+    )
 
     def initialize
       load!
@@ -32,7 +37,16 @@ module Tcelfer
     end
 
     def save!
-      File.write(DEFAULT_STORE_PATH, @data.to_json)
+      File.write(DEFAULT_STORE_PATH, JSON.pretty_generate(@data))
+    end
+
+    def by_month(mon)
+      raise StorageError, "Invalid Month #{mon}, valid: [1-12]" unless (1..12).cover? mon
+
+      raw_days = @data.group_by { |k, _v| Date.parse(k).month }
+      raw_days.fetch(mon, {}).map do |date, info|
+        Day.new(info['rating'], info['notes'], Date.parse(date))
+      end
     end
   end
 end
