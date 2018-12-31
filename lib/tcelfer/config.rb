@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'anyway'
+# HACK: We want to File.expand_path in the config files, what's wrong with that?
+require 'erb'
 
 module Tcelfer
   # Configuration for tcelfer, thanks to anyway_config

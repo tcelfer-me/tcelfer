@@ -43,27 +43,38 @@ module Tcelfer
       require 'tcelfer/day'
       rating = @prompt.select(
         'How was your day?',
-        Tcelfer::DAY_RATINGS, required: true, filter: true
+        DAY_RATINGS, required: true, filter: true
       )
       notes = @prompt.ask('Any additional notes?')
-      day = Tcelfer::Day.new(rating, notes).save!
+      day = Day.new(rating, notes).save!
       @prompt.say("Recorded [#{day.date}]: #{Paint[rating, :bold]}")
     rescue Tcelfer::Error => err
       @prompt.error("[#{err.class}] #{err}")
     end
 
     method_option(:month, aliases: ['-m'], type: :numeric)
+    method_option(:legend, aliases: ['-k'], type: :boolean, default: false)
     desc 'report', 'generate a report'
     def report
       require 'tcelfer/report'
-      rep = Tcelfer::Report.new
-      if options['month']
-        @prompt.say(rep.generate_month_report(options['month']))
-      else
-        @prompt.say('This path is not yet supported')
-      end
+      rep = Report.new
+      @prompt.say(gen_report(rep, options['month'], options['legend']))
     rescue Tcelfer::Error => err
       @prompt.error("[#{err.class}] #{err}")
+    end
+
+    private
+
+    def gen_report(rep, month, legend)
+      if month && legend
+        rep.month_with_legend(month)
+      elsif month
+        rep.generate_month_report(month)
+      elsif legend
+        Report.legend
+      else
+        'Unfinished path at the moment'
+      end
     end
   end
 end
