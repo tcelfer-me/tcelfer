@@ -1,1 +1,1 @@
-db_path: <%= File.expand_path('~/Library/Caches/tcelfer/dev_db.json') %>
+sqlite_path: <%= File.expand_path('~/Library/Caches/tcelfer/dev.sqlite.db') %>
