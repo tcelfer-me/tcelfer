@@ -1,3 +1,6 @@
+Layout/ExtraSpacing:
+    AllowForAlignment: true
+
 Metrics/LineLength:
     Max: 120
 

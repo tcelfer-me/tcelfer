@@ -14,36 +14,28 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'json'
-
-require 'tcelfer/day'
+require 'date'
+require 'sequel'
 
 module Tcelfer
-  # Store the data for tcelfer
+  # Middleware between Sequel and everything else
   class Storage
-    attr_reader :data
+    attr_reader :days
 
     def initialize
-      load!
+      Sequel.connect("sqlite://#{Tcelfer.config.sqlite_path}")
+      Dir["#{__dir__}/models/*"].each(&Kernel.method(:require))
+      @days = Tcelfer::Models::Day
     end
 
-    def load!
-      @data = File.exist?(Tcelfer.config.db_path) ? JSON.parse(File.read(Tcelfer.config.db_path)) : {}
-    end
-
-    def save!
-      cache_dir = File.dirname(Tcelfer.config.db_path)
-      FileUtils.mkdir_p(cache_dir) unless Dir.exist? cache_dir
-      File.write(Tcelfer.config.db_path, JSON.pretty_generate(@data))
-    end
-
-    def by_month(mon)
+    def by_month(mon, year)
       raise StorageError, "Invalid Month #{mon}, valid: [1-12]" unless (1..12).cover? mon
 
-      raw_days = @data.group_by { |k, _v| Date.parse(k).month }
-      raw_days.fetch(mon, {}).map do |date, info|
-        Day.new(info['rating'], info['notes'], Date.parse(date))
-      end
+      @days.where(date: Date.new(year, mon, 1)..Date.new(year, mon, -1)).to_a
+    end
+
+    def by_year(year)
+      @days.where(date: Date.new(year, 1, 1)..Date.new(year, -1, -1)).to_a
     end
   end
 end

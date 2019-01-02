@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 # Copyright (C) 2018  Anthony Gargiulo <anthony@agargiulo.com>
@@ -14,17 +15,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'anyway'
-# HACK: We want to File.expand_path in the config files, what's wrong with that?
-require 'erb'
+require 'pry'
+require 'sequel'
 
-module Tcelfer
-  # Configuration for tcelfer, thanks to anyway_config
-  class Config < Anyway::Config
-    config_name :tcelfer
-    attr_config(
-      :sqlite_path,
-      db_path: File.join(File.expand_path('../../', __dir__), 'tmp', 'dev_store.json')
-    )
-  end
+require 'tcelfer/config'
+
+config = Tcelfer::Config.new
+db = Sequel.connect("sqlite://#{config.sqlite_path}")
+
+## DAYS ##
+db.drop_table? :days
+db.create_table :days do
+  primary_key :id
+  Date :date, index: { unique: true }, null: false
+  String :rating, null: false
+  String :notes
 end
