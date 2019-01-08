@@ -75,9 +75,11 @@ module Tcelfer
       # returns an instance of the Day model representing the users choices.
       # @return [Tcelfer::Models::Day]
       def rec_day!(store)
-        user_date = options.key?('date') ? Date.parse(options['date']) : Date.today
-        rating    = @prompt.select('How was your day?', DAY_RATINGS, required: true, filter: true)
-        notes     = @prompt.ask('Any additional notes?')
+        user_date            = options.key?('date') ? Date.parse(options['date']) : Date.today
+
+        rate_prompt_settings = { required: true, filter: true, per_page: DAY_RATINGS.length }
+        rating               = @prompt.select('How was your day?', DAY_RATINGS, **rate_prompt_settings)
+        notes                = @prompt.ask('Any additional notes?')
         # noinspection RubyArgCount
         store.days.new(rating: rating, notes: notes, date: user_date).save
       end
