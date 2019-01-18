@@ -21,6 +21,7 @@ require 'tcelfer/version'
 
 # Main man Tcelfer himself
 module Tcelfer
+  # Found these on Reddit
   DAY_RATINGS = [
     'Amazing, Fantastic Day',
     'Really Good, Happy Day',
@@ -31,7 +32,18 @@ module Tcelfer
     'Depressed, Sad Day'
   ].freeze
 
+  # Separate because reasons that used to make sense and fixing is not worth at the moment
+  RATING_TO_COLOR_MAP = DAY_RATINGS.zip(
+    # ordering taking from a mix of examples on reddit
+    # and my own preferences.
+    # '#4B0082' is indigo and :green != 'green' :(
+    ['maroon', :green, 'peru', '#4B0082', :red, 'orange', :blue]
+    # based on ColorPicker generic RGB on macOS if you want those
+    # %w[#ca4674 #6ba089 #cca04d #4b0082 #bd2d26 #fb9f09 #5a86ac]
+  ).to_h.freeze
+
   def self.config
     @config ||= Config.new
+    @config.validate!
   end
 end

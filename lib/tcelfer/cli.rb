@@ -20,6 +20,7 @@ require 'thor'
 require 'tty-prompt'
 
 require 'tcelfer'
+require 'tcelfer/cli/report'
 
 module Tcelfer
   module CLI
@@ -37,32 +38,31 @@ module Tcelfer
         true
       end
 
-      desc 'version', 'Prints the current version'
+      # Set up debug things I guess? This could be messy
+      class_option(:debug, aliases: %w[-d -v], type: :boolean, default: false)
 
+      desc 'version', 'Prints the current version'
       def version
         puts Tcelfer::VERSION
       end
 
       method_option(:date, aliases: %w[-d], desc: 'Any format valid for ruby Date e.g. 2019-10-31', required: false)
       desc 'day', 'record info for a day'
-
       def day
+        Tcelfer.config.debug = options[:debug]
         store  = Tcelfer::Storage.new
-        tc_day = rec_day!(store)
+        tc_day = rec_day! store
         @prompt.say("Recorded [#{tc_day.date}]: #{Paint[tc_day.rating, :bold]}")
       rescue Tcelfer::Error => err
         @prompt.error("[#{err.class}]", err)
-      rescue Sequel::UniqueConstraintViolation => sql_err
-        @prompt.error("[#{sql_err.class}]", 'You already have a record for that day')
       end
 
       method_option(:month, aliases: %w[-m], type: :numeric)
-      method_option(:legend, aliases: %w[-k], type: :boolean, default: false)
+      method_option(:legend, aliases: %w[-k -l], type: :boolean, default: false)
       method_option(:year, aliases: %w[-y], type: :numeric, default: Date.today.year)
       desc 'report', 'generate a report'
-
       def report
-        require 'tcelfer/cli/report'
+        Tcelfer.config.debug = options[:debug]
         rep = Report.new
         @prompt.say(gen_report(rep, options['month'], options['year'], options['legend']))
       rescue Tcelfer::Error => err
@@ -80,8 +80,7 @@ module Tcelfer
         rate_prompt_settings = { required: true, filter: true, per_page: DAY_RATINGS.length }
         rating               = @prompt.select('How was your day?', DAY_RATINGS, **rate_prompt_settings)
         notes                = @prompt.ask('Any additional notes?')
-        # noinspection RubyArgCount
-        store.days.new(rating: rating, notes: notes, date: user_date).save
+        store.rec_day(rating, notes, user_date)
       end
 
       # Heavy lifting for `tcelfer report ...`
@@ -99,7 +98,7 @@ module Tcelfer
         elsif legend
           Report.legend
         else
-          'Unfinished path at the moment'
+          raise Tcelfer::ReportError, 'Please provide either -m, -k/-l, or both'
         end
       end
     end

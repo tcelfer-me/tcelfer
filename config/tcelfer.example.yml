@@ -1,1 +1,5 @@
-sqlite_path: <%= File.expand_path('~/Library/Caches/tcelfer/dev.sqlite.db') %>
+sqlite_path: dev.sqlite.db
+# Can also be set with the cli (-d, -v, --debug)
+debug: false
+# If you want to edit past days, set to true.
+update_existing: false

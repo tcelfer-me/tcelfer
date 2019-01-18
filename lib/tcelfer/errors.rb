@@ -19,11 +19,17 @@ module Tcelfer
   # Base error class, extend this one please
   class Error < StandardError; end
 
-  # Issues with Tcelfer::Day
-  class DayError < Error; end
-
   # Issues with Storage
   class StorageError < Error; end
+
+  # When we have a dupe and weren't asked to overwrite
+  class DuplicateDayError < StorageError
+    # The return value here is used by Sinatra's error handling
+    # It leads into the `error 4XX {...}` blocks
+    def http_status
+      409
+    end
+  end
 
   # Issues with reports
   class ReportError < Error; end

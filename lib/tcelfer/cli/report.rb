@@ -22,17 +22,15 @@ module Tcelfer
   module CLI
     # Generate reports with day/week/month/year granularity.
     class Report
-      # ordering taking from a mix of examples on reddit
-      # and my own preferences. '#4B0082' is indigo
-      # Magic array?
-      RATING_TO_COLOR_MAP = Tcelfer::DAY_RATINGS.zip(
-        ['maroon', :green, 'peru', '#4B0082', :red, 'orange', :blue]
-      ).to_h.freeze
-
       def initialize
         @store = Tcelfer::Storage.new
       end
 
+      # Takes a month and year and returns a pretty formatted Terminal::Table
+      # with days colored according to Tcelfer::RATING_TO_COLOR_MAP
+      # @param [Integer] month
+      # @param [Integer] year
+      # @return [Terminal::Table]
       def generate_month_report(month, year)
         mon_by_wday = @store.by_month(month, year).group_by { |day| day.date.wday }
         if mon_by_wday.length < 7
@@ -44,6 +42,10 @@ module Tcelfer
         Terminal::Table.new(rows: weeks, style: { all_separators: true }, headings: Date::ABBR_DAYNAMES)
       end
 
+      # Same as generate_month_report except it includes a color legend
+      # @param [Integer] month
+      # @param [Integer] year
+      # @return [Terminal::Table]
       def month_with_legend(month, year)
         tab = generate_month_report month, year
         Terminal::Table.new(rows: [[tab, Report.legend]]).tap do |combined|
@@ -52,8 +54,10 @@ module Tcelfer
         end
       end
 
+      # Formats Tcelfer::RATING_TO_COLOR_MAP into a pretty legend Terminal::Table
+      # @return [Terminal::Table]
       def self.legend
-        leg = Tcelfer::CLI::Report::RATING_TO_COLOR_MAP.map do |rating, color|
+        leg = Tcelfer::RATING_TO_COLOR_MAP.map do |rating, color|
           [Paint['    ', :inverse, color], rating]
         end
         Terminal::Table.new(rows: leg, headings: %w[Rating Color].map { |head| Paint[head, :bold] })
@@ -61,6 +65,11 @@ module Tcelfer
 
       private
 
+      # Takes a hash with keys from 0 to 6 (ostensibly)
+      # and adds `nil` so the first of the month is the first
+      # colored day in that week row
+      # @param [Hash] mon_by_wday
+      # @return [Nil]
       def pad_month_start!(mon_by_wday)
         mon_by_wday.keys.sort.each do |wd|
           dates = mon_by_wday[wd]
@@ -77,7 +86,7 @@ module Tcelfer
       def color_day(day)
         return '  ' unless day
 
-        color = RATING_TO_COLOR_MAP[day.rating]
+        color = Tcelfer::RATING_TO_COLOR_MAP[day.rating]
         Paint['   ', :inverse, color]
       end
 

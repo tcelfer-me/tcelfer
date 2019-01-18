@@ -1,15 +1,15 @@
 Layout/ExtraSpacing:
-    AllowForAlignment: true
+  AllowForAlignment: true
 
 Metrics/LineLength:
-    Max: 120
+  Max: 120
 
 Metrics/BlockLength:
-    Exclude:
-    - tcelfer.gemspec
+  Exclude:
+  - tcelfer.gemspec
 
 AllCops:
-    TargetRubyVersion: 2.6
-    Exclude:
-    - exe/tcelfer_test.rb
-
+  Exclude:
+      - 'vendor/**/*'
+      - 'vendor/**/.*'
+  TargetRubyVersion: 2.6

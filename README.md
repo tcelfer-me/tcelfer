@@ -1,10 +1,10 @@
 # Tcelfer
 
 ### [t]cel-fer:
-  - A fun way to keep track of simple summaries of your month/year.
+  - A fun way to keep track of simple summaries of your months.
 
 ## Requirements
-* Ruby 2.6.0
+* Ruby 2.5.0+ (Tested with 2.6.0 mostly)
 * Sqlite3
 
 ## Installation
@@ -12,20 +12,34 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'tcelfer', '~> 0.2'
+gem 'tcelfer', '~> 1.0'
 ```
 
 And then execute:
-```
+```bash
 $ bundle
 ```
 Or install it yourself as:
-```
+```bash
 $ gem install tcelfer
 ```
+
+## Setup
+```bash
+# Configure with one of the following:
+# Just change the db location
+export TCELFER_SQLITE_PATH=path/to/some_file.db
+# Or copy `config/tcelfer.example.yml` and use:
+export TCELFER_CONF=~/.config/tcelfer/my_conf.yml
+# Initialize the database
+$ bin/db_init
+```
+
 ## Usage
 
-```
+```bash
+# TODO: Find a better way to do this
+# export TCELFER_SQLITE_PATH TCELFER_CONF from above
 # Record your day
 $ tcelfer day [-d 2018-12-31]
 

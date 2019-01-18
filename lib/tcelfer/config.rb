@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'anyway'
-# HACK: We want to File.expand_path in the config files, what's wrong with that?
-require 'erb'
 
 module Tcelfer
   # Configuration for tcelfer, thanks to anyway_config
@@ -24,7 +22,14 @@ module Tcelfer
     config_name :tcelfer
     attr_config(
       :sqlite_path,
-      db_path: File.join(File.expand_path('../../', __dir__), 'tmp', 'dev_store.json')
+      debug: false,
+      update_existing: false
     )
+
+    def validate!
+      raise Tcelfer::StorageError, 'TCELFER_SQLITE_PATH not defined, cannot continue' if sqlite_path.nil?
+
+      self
+    end
   end
 end

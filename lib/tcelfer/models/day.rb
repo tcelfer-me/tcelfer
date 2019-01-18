@@ -18,7 +18,16 @@ require 'sequel'
 
 module Tcelfer
   module Models
+    # Day model
     class Day < Sequel::Model(:days)
+      # Pretty format for a Day model
+      # 2019-01-17: Normal, Average Day
+      # @return [String]
+      def to_s
+        str = "#{date}: #{rating}"
+        str += " || Notes: #{notes}" unless notes.nil?
+        str
+      end
     end
   end
 end

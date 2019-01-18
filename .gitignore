@@ -2,6 +2,7 @@
 /.yardoc
 /_yardoc/
 /coverage/
+/data/
 /doc/
 /pkg/
 /spec/reports/
@@ -15,5 +16,5 @@
 Gemfile.lock
 
 # Configs need to be *.example.yml
-/config/*
-!/config/*.example.yml
+**/config/**
+!**/config/**/*.example.yml
