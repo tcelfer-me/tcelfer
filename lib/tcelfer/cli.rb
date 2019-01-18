@@ -39,7 +39,7 @@ module Tcelfer
       end
 
       # Set up debug things I guess? This could be messy
-      class_option(:debug, aliases: %w[-d -v], type: :boolean, default: false)
+      class_option(:verbose, aliases: %w[-v], type: :boolean, default: false)
 
       desc 'version', 'Prints the current version'
       def version
