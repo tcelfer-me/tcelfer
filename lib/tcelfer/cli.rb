@@ -49,7 +49,7 @@ module Tcelfer
       method_option(:date, aliases: %w[-d], desc: 'Any format valid for ruby Date e.g. 2019-10-31', required: false)
       desc 'day', 'record info for a day'
       def day
-        Tcelfer.config.debug = options[:debug]
+        Tcelfer.config.debug = options[:verbose]
         store  = Tcelfer::Storage.new
         tc_day = rec_day! store
         @prompt.say("Recorded [#{tc_day.date}]: #{Paint[tc_day.rating, :bold]}")
@@ -62,7 +62,7 @@ module Tcelfer
       method_option(:year, aliases: %w[-y], type: :numeric, default: Date.today.year)
       desc 'report', 'generate a report'
       def report
-        Tcelfer.config.debug = options[:debug]
+        Tcelfer.config.debug = options[:verbose]
         rep = Report.new
         @prompt.say(gen_report(rep, options['month'], options['year'], options['legend']))
       rescue Tcelfer::Error => err

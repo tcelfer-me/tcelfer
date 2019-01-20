@@ -3,6 +3,8 @@
 ### [t]cel-fer:
   - A fun way to keep track of simple summaries of your months.
 
+![generated_report](/images/generated_report.png)
+
 ## Requirements
 * Ruby 2.5.0+ (Tested with 2.6.0 mostly)
 * Sqlite3
@@ -46,6 +48,8 @@ $ tcelfer day [-d 2018-12-31]
 # Reflect on your month
 $ tcelfer report [-y|--year=)YEAR] -m|--month=MON [--legend]
 ```
+![record_day](/images/record_day.png)
+![recorded_day](/images/recorded_day.png)
 
 ## Development
 
