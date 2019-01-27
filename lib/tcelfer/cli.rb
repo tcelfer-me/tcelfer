@@ -47,6 +47,7 @@ module Tcelfer
       end
 
       method_option(:date, aliases: %w[-d], desc: 'Any format valid for ruby Date e.g. 2019-10-31', required: false)
+      method_option(:yesterday, aliases: %w[-p], desc: 'Record yesterday, ignored if `-d` is present', required: false)
       desc 'day', 'record info for a day'
       def day
         Tcelfer.config.debug = options[:verbose]
@@ -71,12 +72,21 @@ module Tcelfer
 
       private
 
+      def pick_date!
+        if options.key?(:date)
+          options[:date]
+        elsif options.key?(:yesterday)
+          Date.today - 1
+        else
+          Date.today
+        end
+      end
+
       # Heavy lifting for `tcelfer day ...`
       # returns an instance of the Day model representing the users choices.
       # @return [Tcelfer::Models::Day]
       def rec_day!(store)
-        user_date            = options.key?('date') ? Date.parse(options['date']) : Date.today
-
+        user_date            = pick_date!
         rate_prompt_settings = { required: true, filter: true, per_page: DAY_RATINGS.length }
         rating               = @prompt.select('How was your day?', DAY_RATINGS, **rate_prompt_settings)
         notes                = @prompt.ask('Any additional notes?')
