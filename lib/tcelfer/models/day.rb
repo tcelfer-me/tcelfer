@@ -15,11 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require 'sequel'
+require 'sequel/plugins/json_serializer'
 
 module Tcelfer
   module Models
     # Day model
     class Day < Sequel::Model(:days)
+      plugin :json_serializer
       # Pretty format for a Day model
       # 2019-01-17: Normal, Average Day
       # @return [String]

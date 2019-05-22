@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `--yesterday` flag for `tcelfer day`
 - `tcelfer ytd`
   - show all months up through the current one
+- Enable JSON serializer plugin for sequel Day model
 
 ## [1.0.2]  - 2019-01-18
 ### Added
