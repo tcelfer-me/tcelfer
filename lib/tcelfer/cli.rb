@@ -56,8 +56,8 @@ module Tcelfer
         store  = Tcelfer::Storage.new
         tc_day = rec_day! store
         @prompt.say("Recorded [#{tc_day.date}]: #{Paint[tc_day.rating, :bold]}")
-      rescue Tcelfer::Error => err
-        @prompt.error("[#{err.class}]", err)
+      rescue Tcelfer::Error => e
+        @prompt.error("[#{e.class}]", e)
       end
 
       method_option(:month, aliases: %w[-m], type: :numeric)
@@ -67,8 +67,8 @@ module Tcelfer
         Tcelfer.config.debug = options[:verbose]
         rep = Report.new
         @prompt.say(gen_report(rep, options['month'], options['year'], options['legend']))
-      rescue Tcelfer::Error => err
-        @prompt.error("[#{err.class}]", err)
+      rescue Tcelfer::Error => e
+        @prompt.error("[#{e.class}]", e)
       end
 
       desc 'ytd', 'Report on the current calendar year'
@@ -79,8 +79,8 @@ module Tcelfer
           @prompt.say(rep.generate_month_report(mon))
         end
         @prompt.say(Report.legend)
-      rescue Tcelfer::Error => err
-        @prompt.error("[#{err.class}]", err)
+      rescue Tcelfer::Error => e
+        @prompt.error("[#{e.class}]", e)
       end
 
       private
