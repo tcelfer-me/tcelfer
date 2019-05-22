@@ -31,7 +31,7 @@ module Tcelfer
       # @param [Integer] month
       # @param [Integer] year
       # @return [Terminal::Table]
-      def generate_month_report(month, year)
+      def generate_month_report(month, year = Date.today.year)
         mon_by_wday = @store.by_month(month, year).group_by { |day| day.date.wday }
         if mon_by_wday.length < 7
           raise ReportError, "Unable to process #{Date::MONTHNAMES[month]}, please have at least 7 days of data first"
@@ -47,7 +47,7 @@ module Tcelfer
       # @param [Integer] year
       # @return [Terminal::Table]
       def month_with_legend(month, year)
-        tab = generate_month_report month, year
+        tab = generate_month_report(month, year)
         Terminal::Table.new(rows: [[tab, Report.legend]]).tap do |combined|
           combined.style    = { border_x: '', border_y: '', border_i: '', width: `tput cols`.to_i }
           combined.headings = ["== #{Date::MONTHNAMES[month]} - #{year} ==", '== Legend ==']
@@ -60,7 +60,7 @@ module Tcelfer
         leg = Tcelfer::RATING_TO_COLOR_MAP.map do |rating, color|
           [Paint['    ', :inverse, color], rating]
         end
-        Terminal::Table.new(rows: leg, headings: %w[Rating Color].map { |head| Paint[head, :bold] })
+        Terminal::Table.new(rows: leg, headings: %w[Color Rating].map { |head| Paint[head, :bold] })
       end
 
       private

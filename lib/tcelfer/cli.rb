@@ -40,6 +40,8 @@ module Tcelfer
 
       # Set up debug things I guess? This could be messy
       class_option(:verbose, aliases: %w[-v], type: :boolean, default: false)
+      # Legends are useful for more than one command
+      class_option(:legend, aliases: %w[-k -l], type: :boolean, default: false)
 
       desc 'version', 'Prints the current version'
       def version
@@ -59,13 +61,24 @@ module Tcelfer
       end
 
       method_option(:month, aliases: %w[-m], type: :numeric)
-      method_option(:legend, aliases: %w[-k -l], type: :boolean, default: false)
       method_option(:year, aliases: %w[-y], type: :numeric, default: Date.today.year)
       desc 'report', 'generate a report'
       def report
         Tcelfer.config.debug = options[:verbose]
         rep = Report.new
         @prompt.say(gen_report(rep, options['month'], options['year'], options['legend']))
+      rescue Tcelfer::Error => err
+        @prompt.error("[#{err.class}]", err)
+      end
+
+      desc 'ytd', 'Report on the current calendar year'
+      def ytd
+        Tcelfer.config.debug = options[:verbose]
+        rep = Report.new
+        1.upto(Date.today.mon) do |mon|
+          @prompt.say(rep.generate_month_report(mon))
+        end
+        @prompt.say(Report.legend)
       rescue Tcelfer::Error => err
         @prompt.error("[#{err.class}]", err)
       end

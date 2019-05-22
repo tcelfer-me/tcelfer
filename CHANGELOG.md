@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `--yesterday` flag for `tcelfer day`
+- `tcelfer ytd`
+  - show all months up through the current one
 
 ## [1.0.2]  - 2019-01-18
 ### Added
