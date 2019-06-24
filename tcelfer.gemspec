@@ -43,18 +43,19 @@ Gem::Specification.new do |spec|
   spec.executables   = Dir['exe/*'].map { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',    '~> 2.0'
-  spec.add_development_dependency 'dotenv',     '~> 2.7'
-  spec.add_development_dependency 'pry',        '~> 0.12'
-  spec.add_development_dependency 'rake',       '~> 12.0'
-  spec.add_development_dependency 'rspec',      '~> 3.0'
-  spec.add_development_dependency 'rubocop',    '~> 0.70'
+  spec.add_development_dependency 'bundler',             '~> 2.0'
+  spec.add_development_dependency 'dotenv',              '~> 2.7'
+  spec.add_development_dependency 'pry',                 '~> 0.12'
+  spec.add_development_dependency 'rake',                '~> 12.0'
+  spec.add_development_dependency 'rspec',               '~> 3.0'
+  spec.add_development_dependency 'rubocop',             '~> 0.71'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.4'
 
   spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
   spec.add_runtime_dependency 'paint',           '~> 2.1'
-  spec.add_runtime_dependency 'sequel',          '~> 5.20'
+  spec.add_runtime_dependency 'sequel',          '~> 5.21'
   spec.add_runtime_dependency 'sqlite3',         '~> 1.4'
   spec.add_runtime_dependency 'terminal-table',  '~> 1.8'
   spec.add_runtime_dependency 'thor',            '~> 0.20'
-  spec.add_runtime_dependency 'tty-prompt',      '~> 0.18'
+  spec.add_runtime_dependency 'tty-prompt',      '~> 0.19'
 end
