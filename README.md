@@ -6,7 +6,7 @@
 ![generated_report](/images/generated_report.png)
 
 ## Requirements
-* Ruby 2.5.0+ (Tested with 2.6.0 mostly)
+* Ruby 2.3.0+ (Tested with 2.6.0 mostly)
 * Sqlite3
 
 ## Installation
@@ -28,13 +28,11 @@ $ gem install tcelfer
 
 ## Setup
 ```bash
-# Configure with one of the following:
-# Just change the db location
-export TCELFER_SQLITE_PATH=path/to/some_file.db
-# Or copy `config/tcelfer.example.yml` and use:
+# Example configuration
 export TCELFER_CONF=~/.config/tcelfer/my_conf.yml
+cp config/tcelfer.example.yml ${TCELFER_CONF}
 # Initialize the database
-$ bin/db_init
+$ tcelfer db init
 ```
 
 ## Usage

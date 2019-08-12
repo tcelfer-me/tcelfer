@@ -59,7 +59,7 @@ module Tcelfer
     private
 
     def validate_db!(db)
-      raise Tcelfer::StorageError, 'did you forget to run `bin/db_init`?' unless db.tables.include? :days
+      raise Tcelfer::StorageError, 'did you forget to run `tcelfer db initdb`?' unless db.tables.include? :days
     end
   end
 end

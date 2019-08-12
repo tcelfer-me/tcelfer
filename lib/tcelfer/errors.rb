@@ -33,4 +33,7 @@ module Tcelfer
 
   # Issues with reports
   class ReportError < Error; end
+
+  # Issues with the CLI
+  class CliError < Error; end
 end

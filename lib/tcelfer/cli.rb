@@ -21,6 +21,7 @@ require 'tty-prompt'
 
 require 'tcelfer'
 require 'tcelfer/cli/report'
+require 'tcelfer/cli/db_tasks'
 
 module Tcelfer
   module CLI
@@ -53,7 +54,7 @@ module Tcelfer
       desc 'day', 'record info for a day'
       def day
         Tcelfer.config.debug = options[:verbose]
-        store  = Tcelfer::Storage.new
+        store = Tcelfer::Storage.new
         tc_day = rec_day! store
         @prompt.say("Recorded [#{tc_day.date}]: #{Paint[tc_day.rating, :bold]}")
       rescue Tcelfer::Error => e
@@ -82,6 +83,9 @@ module Tcelfer
       rescue Tcelfer::Error => e
         @prompt.error("[#{e.class}]", e)
       end
+
+      desc 'db', 'Perform various DB related tasks'
+      subcommand 'db', DBTasks
 
       private
 

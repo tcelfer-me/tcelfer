@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 # frozen_string_literal: true
 
 # Copyright (C) 2019  Anthony Gargiulo <anthony@agargiulo.com>
@@ -15,18 +14,17 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-require 'sequel'
+Sequel.migration do
+  up do
+    create_table? :days do
+      primary_key :id
+      Date :date, index: { unique: true }, null: false
+      String :rating, null: false
+      String :notes
+    end
+  end
 
-require 'tcelfer/config'
-
-config = Tcelfer::Config.new
-db = Sequel.connect("sqlite://#{config.sqlite_path}")
-
-## DAYS ##
-db.drop_table? :days
-db.create_table :days do
-  primary_key :id
-  Date :date, index: { unique: true }, null: false
-  String :rating, null: false
-  String :notes
+  down do
+    drop_table?(:days)
+  end
 end
