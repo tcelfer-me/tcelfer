@@ -1,6 +1,9 @@
 Layout/ExtraSpacing:
   AllowForAlignment: true
 
+Layout/AlignHash:
+  EnforcedColonStyle: table
+
 Metrics/LineLength:
   Max: 120
 

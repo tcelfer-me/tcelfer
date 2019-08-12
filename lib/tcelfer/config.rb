@@ -22,14 +22,15 @@ module Tcelfer
     config_name :tcelfer
     attr_config(
       :sqlite_path,
-      debug: false,
-      update_existing: false
+      debug:           false,
+      update_existing: false,
+      migrations_path: File.expand_path('../../db/migrations', __dir__)
     )
 
     def validate!
-      raise Tcelfer::StorageError, 'TCELFER_SQLITE_PATH not defined, cannot continue' if sqlite_path.nil?
+      return self if sqlite_path
 
-      self
+      raise Tcelfer::StorageError, 'Please set `sqlite_path` to continue'
     end
   end
 end

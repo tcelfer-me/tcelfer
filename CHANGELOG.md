@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Changed
+- new subcommands under `tcelfer db` to replace the `bin/db_init` functionality
+  - initdb|migrate: run all or some DB migrations (up or down)
+  - path: shows the path of the database (could be made into `tcelfer env` instead maybe?
+  - new config option, `:migrations_path`, defaults to `<tcelfer_gem_root>/db/migrations`
+- updated Ruby versions for Travis CI
+- updated several gem dependencies
+
 ## [1.0.3]  - 2019-05-21
 ### Added
 - `--yesterday` flag for `tcelfer day`

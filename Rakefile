@@ -14,12 +14,17 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
+
 RuboCop::RakeTask.new(:rubocop)
+RuboCop::RakeTask.new(:rubocop_perf) do |task|
+  task.requires << 'rubocop-performance'
+end
 
 task default: %i[spec rubocop]
 
