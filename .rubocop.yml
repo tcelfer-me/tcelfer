@@ -3,6 +3,7 @@ Layout/ExtraSpacing:
 
 Layout/AlignHash:
   EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
 
 Metrics/LineLength:
   Max: 120

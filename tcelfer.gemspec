@@ -18,6 +18,8 @@ lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'tcelfer/version'
 
+github_baseurl = 'github.com/agargiulo/tcelfer'
+
 Gem::Specification.new do |spec|
   spec.name          = 'tcelfer'
   spec.version       = Tcelfer::VERSION
@@ -27,12 +29,14 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Reflect on your day and keep track'
   spec.description   = 'Reflect on your day, prompts with thor or webapp and stores to db'
-  spec.homepage      = 'https://www.github.com/agargiulo/tcelfer'
+  spec.homepage      = "https://#{github_baseurl}"
 
-  spec.metadata['allowed_push_host'] = 'https://rubygems.org'
-
-  spec.metadata['homepage_uri'] = spec.homepage
-  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata = {
+    # 'allowed_push_host' => 'https://rubygems.org', # TODO: See if there's a way to specify more than one of these?
+    'homepage_uri'    => spec.homepage,
+    'source_code_uri' => spec.homepage,
+    'github_url'      => "ssh://#{github_baseurl}"
+  }
 
   # Specify which files should be added to the gem when it is released.
   # No git please | Sane defaults suggested by the rubygem docs.

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.6]  - 2019-09-07
+### Added
+- Allow publishing to beta GitHub Registry
+### Changed
+- Updated Ruby teeny versions
+
 ## [1.0.5]  - 2019-08-12
 ### Fixed
 - errant Dockerfile was being included, no more.
