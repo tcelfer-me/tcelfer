@@ -57,7 +57,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop',             '~> 0.74'
   spec.add_development_dependency 'rubocop-performance', '~> 1.4'
 
-  spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
+  spec.add_runtime_dependency 'anyway_config',   '>= 1.4', '< 3.0'
   spec.add_runtime_dependency 'paint',           '~> 2.1'
   spec.add_runtime_dependency 'sequel',          '~> 5.23'
   spec.add_runtime_dependency 'sqlite3',         '~> 1.4'
