@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      # Check for updates Wednesdays at 19:00 PST (03:00 UTC)
+      interval: "weekly"
+      day:      "wednesday"
+      time:     "03:00"
+    # Disable any limits here.
+    open-pull-requests-limit: 0
+    # Bump dep versions in Gemfile and Gemfile.lock, but only direct deps
+    versioning-strategy: "increase"
+    allow:
+      - dependency-type: "direct"
+    # This is my project, might as well flat assign them all to myself.
+    assignees:
+      - "agargiulo"
+    reviewers:
+      - "agargiulo"
