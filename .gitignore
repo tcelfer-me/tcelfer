@@ -12,9 +12,6 @@
 # rspec failure tracking
 .rspec_status
 
-# We're an app but this file contains secrets at the moment
-Gemfile.lock
-
 # Configs need to be *.example.yml
 **/config/**
 !**/config/**/*.example.yml
