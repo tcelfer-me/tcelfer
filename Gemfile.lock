@@ -7,7 +7,7 @@ PATH
       sequel (~> 5.33)
       sqlite3 (~> 1.4)
       terminal-table (~> 1.8)
-      thor (~> 0.20)
+      thor (>= 0.20, < 2.0)
       tty-prompt (~> 0.19)
 
 GEM
@@ -66,7 +66,7 @@ GEM
     sqlite3 (1.4.2)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
-    thor (0.20.3)
+    thor (1.0.1)
     tty-color (0.5.1)
     tty-cursor (0.7.1)
     tty-prompt (0.21.0)
