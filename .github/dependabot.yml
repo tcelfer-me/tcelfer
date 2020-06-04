@@ -7,8 +7,7 @@ updates:
       interval: "weekly"
       day:      "wednesday"
       time:     "03:00"
-    # Disable any limits here.
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 10
     # Bump dep versions in Gemfile and Gemfile.lock, but only direct deps
     versioning-strategy: "increase"
     allow:
