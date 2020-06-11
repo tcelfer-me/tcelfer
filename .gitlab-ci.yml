@@ -11,8 +11,8 @@ stages:
 test:
   stage: test
   before_script:
+    - apk add --update-cache --virtual tcelfer-deps build-base sqlite-dev
     - ruby -v
-    - gem install bundler -v '~> 2.1.4'
     - bundle config set path vendor
     - bundle install -j 2
   script:
