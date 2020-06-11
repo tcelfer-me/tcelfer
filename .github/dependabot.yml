@@ -3,9 +3,8 @@ updates:
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
-      # Check for updates Wednesdays at 19:00 PST (03:00 UTC)
-      interval: "weekly"
-      day:      "wednesday"
+      # Check for updates First of the Montha at 19:00 PST (03:00 UTC)
+      interval: "monthly"
       time:     "03:00"
     open-pull-requests-limit: 10
     # Bump dep versions in Gemfile and Gemfile.lock, but only direct deps
