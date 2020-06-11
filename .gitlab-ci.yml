@@ -1,0 +1,19 @@
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/ruby/tags/
+default:
+  image: ruby:2.7.1-alpine3.11
+  tags:
+    - shared-exec-docker
+
+stages:
+  - test
+
+test:
+  stage: test
+  before_script:
+    - ruby -v
+    - gem install bundler -v '~> 2.1.4'
+    - bundle config set path vendor
+    - bundle install -j 2
+  script:
+    - bundle exec rake
