@@ -49,13 +49,13 @@ Gem::Specification.new do |spec|
   spec.executables   = Dir['exe/*'].map { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',             '~> 2.0'
+  spec.add_development_dependency 'bundler',             '~> 2.1'
   spec.add_development_dependency 'dotenv',              '~> 2.7'
   spec.add_development_dependency 'pry',                 '~> 0.13'
   spec.add_development_dependency 'rake',                '~> 13.0'
   spec.add_development_dependency 'rspec',               '~> 3.9'
-  spec.add_development_dependency 'rubocop',             '~> 0.85'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.6'
+  spec.add_development_dependency 'rubocop',             '~> 0.88'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.7'
 
   spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
   spec.add_runtime_dependency 'paint',           '~> 2.2'
