@@ -61,7 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'paint',           '~> 2.2'
   spec.add_runtime_dependency 'sequel',          '~> 5.33'
   spec.add_runtime_dependency 'sqlite3',         '~> 1.4'
-  spec.add_runtime_dependency 'terminal-table',  '~> 1.8'
+  spec.add_runtime_dependency 'terminal-table',  '>= 1.8', '< 3.0'
   spec.add_runtime_dependency 'thor',            '~> 0.20'
   spec.add_runtime_dependency 'tty-prompt',      '~> 0.19'
 end
