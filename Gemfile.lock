@@ -21,7 +21,7 @@ GEM
     equatable (0.6.1)
     method_source (1.0.0)
     necromancer (0.5.1)
-    paint (2.2.0)
+    paint (2.2.1)
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
