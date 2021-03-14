@@ -27,6 +27,8 @@ Gem::Specification.new do |spec|
   spec.email         = ['anthony@agargiulo.com']
   spec.licenses      = ['GPL-3.0-only']
 
+  spec.required_ruby_version = ['>= 2.7.0', '< 3.0.0']
+
   spec.summary       = 'Reflect on your day and keep track'
   spec.description   = 'Reflect on your day, prompts with thor or webapp and stores to db'
   spec.homepage      = "https://#{github_baseurl}"
@@ -54,12 +56,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pry',                 '~> 0.13'
   spec.add_development_dependency 'rake',                '~> 13.0'
   spec.add_development_dependency 'rspec',               '~> 3.9'
-  spec.add_development_dependency 'rubocop',             '~> 0.88'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.7'
+  spec.add_development_dependency 'rubocop',             '~> 1.11'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.8'
 
   spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
   spec.add_runtime_dependency 'paint',           '~> 2.2'
-  spec.add_runtime_dependency 'sequel',          '~> 5.33'
+  spec.add_runtime_dependency 'sequel',          '~> 5.41'
   spec.add_runtime_dependency 'sqlite3',         '~> 1.4'
   spec.add_runtime_dependency 'terminal-table',  '~> 1.8'
   spec.add_runtime_dependency 'thor',            '~> 0.20'
