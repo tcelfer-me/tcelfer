@@ -28,6 +28,7 @@ end
 
 task default: %i[spec rubocop]
 
+desc 'remove files from tmp/'
 task :clean do
   FileUtils.rm_rf(Dir['tmp/*'], verbose: true)
 end

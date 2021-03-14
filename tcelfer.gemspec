@@ -58,6 +58,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec',               '~> 3.9'
   spec.add_development_dependency 'rubocop',             '~> 1.11'
   spec.add_development_dependency 'rubocop-performance', '~> 1.8'
+  spec.add_development_dependency 'rubocop-rake',        '~> 0.5'
 
   spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
   spec.add_runtime_dependency 'paint',           '~> 2.2'

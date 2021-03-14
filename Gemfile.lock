@@ -59,6 +59,8 @@ GEM
     rubocop-performance (1.10.1)
       rubocop (>= 0.90.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    rubocop-rake (0.5.1)
+      rubocop
     ruby-progressbar (1.11.0)
     sequel (5.42.0)
     sqlite3 (1.4.2)
@@ -89,6 +91,7 @@ DEPENDENCIES
   rspec (~> 3.9)
   rubocop (~> 1.11)
   rubocop-performance (~> 1.8)
+  rubocop-rake (~> 0.5)
   tcelfer!
 
 BUNDLED WITH

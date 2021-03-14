@@ -1,3 +1,5 @@
+require: rubocop-rake
+
 Layout/ExtraSpacing:
   AllowForAlignment: true
 
