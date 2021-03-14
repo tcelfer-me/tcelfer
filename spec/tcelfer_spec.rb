@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 RSpec.describe Tcelfer do
-  context 'base info' do
-    before(:all) do
+  context 'with base info' do
+    before do
       ENV['TCELFER_SQLITE_PATH'] = ''
     end
+
     it 'has a version number' do
       expect(Tcelfer::VERSION).not_to be nil
     end
