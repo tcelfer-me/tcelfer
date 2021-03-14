@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.0]  - 2021-03-14
+### Changed
+- Set minimum ruby version to 2.7
+  - Set `required_ruby_version` to not include 3.0.0 yet
+- Updated various gem dependencies
+  - sequel, paint
+- Updated dev gem deps
+- Moved ci/cd from travis to gitlab
+- rubocop updates
+  - rubocop rake and rspec
+
 ## [1.0.6]  - 2019-09-07
 ### Added
 - Allow publishing to beta GitHub Registry
