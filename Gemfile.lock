@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tcelfer (1.1.0)
+    tcelfer (1.1.2)
       anyway_config (~> 1.4)
       paint (~> 2.2)
       sequel (~> 5.56)
