@@ -21,7 +21,7 @@ RSpec.describe Tcelfer do
     end
 
     it 'has a version number' do
-      expect(Tcelfer::VERSION).not_to be nil
+      expect(Tcelfer::VERSION).not_to be_nil
     end
 
     it 'defines more than one daily rating' do
