@@ -1,7 +1,7 @@
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
 default:
-  image: ruby:2.7.2-alpine3.13
+  image: ruby:2.7.6-alpine3.15
   tags:
     - agarg-public-projects
 

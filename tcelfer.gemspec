@@ -35,9 +35,10 @@ Gem::Specification.new do |spec|
 
   spec.metadata = {
     # 'allowed_push_host' => 'https://rubygems.org', # TODO: See if there's a way to specify more than one of these?
-    'homepage_uri'    => spec.homepage,
-    'source_code_uri' => spec.homepage,
-    'github_url'      => "ssh://#{github_baseurl}"
+    'homepage_uri'          => spec.homepage,
+    'source_code_uri'       => spec.homepage,
+    'github_url'            => "ssh://#{github_baseurl}",
+    'rubygems_mfa_required' => 'true'
   }
 
   # Specify which files should be added to the gem when it is released.
@@ -51,19 +52,19 @@ Gem::Specification.new do |spec|
   spec.executables   = Dir['exe/*'].map { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_development_dependency 'bundler',             '~> 2.1'
+  spec.add_development_dependency 'bundler',             '~> 2.3'
   spec.add_development_dependency 'dotenv',              '~> 2.7'
-  spec.add_development_dependency 'pry',                 '~> 0.13'
+  spec.add_development_dependency 'pry',                 '~> 0.14'
   spec.add_development_dependency 'rake',                '~> 13.0'
-  spec.add_development_dependency 'rspec',               '~> 3.9'
-  spec.add_development_dependency 'rubocop',             '~> 1.11'
-  spec.add_development_dependency 'rubocop-performance', '~> 1.8'
-  spec.add_development_dependency 'rubocop-rake',        '~> 0.5'
-  spec.add_development_dependency 'rubocop-rspec',       '~> 2.2'
+  spec.add_development_dependency 'rspec',               '~> 3.11'
+  spec.add_development_dependency 'rubocop',             '~> 1.29'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.13'
+  spec.add_development_dependency 'rubocop-rake',        '~> 0.6'
+  spec.add_development_dependency 'rubocop-rspec',       '~> 2.4'
 
   spec.add_runtime_dependency 'anyway_config',   '~> 1.4'
   spec.add_runtime_dependency 'paint',           '~> 2.2'
-  spec.add_runtime_dependency 'sequel',          '~> 5.41'
+  spec.add_runtime_dependency 'sequel',          '~> 5.56'
   spec.add_runtime_dependency 'sqlite3',         '~> 1.4'
   spec.add_runtime_dependency 'terminal-table',  '~> 1.8'
   spec.add_runtime_dependency 'thor',            '~> 0.20'
